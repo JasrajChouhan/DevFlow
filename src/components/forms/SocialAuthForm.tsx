@@ -1,15 +1,36 @@
 "use client";
 
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/constants/routes";
+import { toast } from "@/hooks/use-toast";
 
 const SocialAuthForm = () => {
   const buttonClass =
     "background-dark400_light900 body-medium text-dark200_light800 min-h-12 flex-1 rounded-2 px-4 py-3.5";
 
   const handleSignIn = async (provider: "github" | "google") => {
-    alert("Sign in with " + provider);
+    console.log(provider);
+    if (!provider) return;
+    try {
+      await signIn(provider, {
+        callbackUrl: ROUTES.HOME,
+        redirect: false,
+      });
+    } catch (error) {
+      console.log(error);
+
+      toast({
+        title: "Sign-in Failed",
+        description:
+          error instanceof Error
+            ? error.message
+            : "An error occured during sign-in",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
