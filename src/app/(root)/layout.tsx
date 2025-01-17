@@ -1,5 +1,6 @@
 import LeftSidebar from "@/components/navigation/LeftSidebar";
 import Navbar from "@/components/navigation/navbar";
+import RightSidebar from "@/components/navigation/RightSidebar";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,7 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="mx-auto w-full max-w-5xl">{children}</div>
         </section>
 
-        {/* left sidebar */}
+        <RightSidebar />
       </div>
     </main>
   );

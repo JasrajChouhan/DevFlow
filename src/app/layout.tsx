@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { Inter, Space_Grotesk } from "next/font/google";
 import React from "react";
 
 import { auth } from "@/auth";
 import { ThemeProvider } from "@/components/provider/theme-provider";
-import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import "./globals.css";
 
 const font = Inter({
   variable: "--font-inter",
@@ -36,6 +36,13 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
+      </head>
       <SessionProvider session={session}>
         <body
           className={`${font.className} ${spaceGrotesk.variable} antialiased`}
