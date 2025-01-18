@@ -4,6 +4,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Input } from "../ui/input";
+
+import { formUrlQuery, removeKeysFromUrlQuery } from "@/lib/url";
 export interface LocalSearchProps {
   route: string;
   imgSrc?: string;
@@ -30,10 +32,28 @@ const LocalSearch = ({
 
   // debounce effect on serach
   useEffect(() => {
-    const debaunce = () => {
-      console.log("debounce");
-    };
-    return () => debaunce();
+    const debaunce = setTimeout(() => {
+      if (searchQuery) {
+        // make new url and push into router
+        const newUrl = formUrlQuery({
+          params: searchParams.toString(),
+          key: "query",
+          value: searchQuery,
+        });
+
+        router.push(newUrl, { scroll: false });
+      } else {
+        if (route === pathname) {
+          const newUrl = removeKeysFromUrlQuery({
+            params: searchParams.toString(),
+            keysToRemove: ["query"],
+          });
+
+          router.push(newUrl, { scroll: false });
+        }
+      }
+    }, 300);
+    return () => clearTimeout(debaunce);
   }, [searchQuery, router, route, searchParams, pathname]);
   return (
     <div
