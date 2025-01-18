@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 
@@ -15,6 +16,15 @@ export default function Home() {
         >
           <Link href={ROUTES.ASK_QUESTION}>Ask a Question</Link>
         </Button>
+      </section>
+      <section className="mt-11">
+        <LocalSearch
+          route="/"
+          imgSrc="/icons/search.svg"
+          placeholder="Search questions"
+          className="flex-1"
+          iconPosition="left"
+        />
       </section>
     </>
   );
