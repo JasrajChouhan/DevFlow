@@ -1,4 +1,4 @@
-import { format, transports } from "winston";
+import { createLogger, format, transports } from "winston";
 
 const formattedTimestamp = format.timestamp({
   format: "YYYY-MM-DD HH:mm:ss",
@@ -51,3 +51,5 @@ export const loggerConfig = () => {
     rejectionHandlers: [new transports.Console()],
   };
 };
+
+export const logger = createLogger(loggerConfig());
