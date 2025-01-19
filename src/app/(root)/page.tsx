@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import QuestionCard from "@/components/card/QuesitonCard";
 import HomeFilter from "@/components/filter/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
@@ -92,7 +93,7 @@ export default async function Home({ searchParams }: SearchParams) {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
-          <h3 key={question._id}> {question.title}</h3> // Todo :  implement question card
+          <QuestionCard key={question._id} question={question} />
         ))}
       </div>
     </>
