@@ -3,6 +3,7 @@ import { logLevels } from "./lib/logger";
 export interface Enivorment {
   NODE_ENV: "development" | "production";
   LOG_LEVEL: keyof typeof logLevels;
+  MONGODB_URI: string;
 }
 
 // get env
