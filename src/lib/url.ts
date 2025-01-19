@@ -17,8 +17,8 @@ export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
   queryString[key] = value;
 
   // stringify the object
-  return qs.stringify({
-    pathn: window.location.pathname,
+  return qs.stringifyUrl({
+    url: window.location.pathname,
     query: queryString,
   });
 };
