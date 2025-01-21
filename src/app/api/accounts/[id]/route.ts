@@ -33,3 +33,31 @@ export async function GET(
     return handleError(error, "api") as APIErrorResponse;
   }
 }
+
+export async function DELETE(
+  _: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  if (!id) {
+    throw new NotFoundError("User not found");
+  }
+  try {
+    await connectToDB();
+    const account = await Account.findByIdAndDelete(id);
+    if (!account) {
+      throw new NotFoundError("Account not found");
+    }
+    return NextResponse.json(
+      {
+        success: true,
+        data: Account,
+      },
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    return handleError(error, "api") as APIErrorResponse;
+  }
+}
