@@ -7,7 +7,7 @@ import { Account } from "@/model";
 import { APIErrorResponse } from "@/types/global";
 
 export async function GET(
-  req: Request,
+  _: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
