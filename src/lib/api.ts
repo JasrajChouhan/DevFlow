@@ -1,6 +1,7 @@
 import { fetchHandler } from "./hanlder/fetch";
 
 import { getEnv } from "@/env";
+import { IAccount } from "@/model/account.model";
 import { IUser } from "@/model/user.model";
 
 const isProduction = getEnv("NODE_ENV") === "production";
@@ -34,5 +35,26 @@ export const api = {
       fetchHandler(`${API_BASE_URI}/users/${id}`, {
         method: "DELETE",
       }),
+  },
+  accounts: {
+    getAll: () => fetchHandler(`${API_BASE_URI}/accounts`),
+    getById: (id: string) => fetchHandler(`${API_BASE_URI}/accounts/${id}`),
+    getByProvider: (providerAccountId: string) =>
+      fetchHandler(`${API_BASE_URI}/accounts/provider`, {
+        method: "POST",
+        body: JSON.stringify({ providerAccountId }),
+      }),
+    create: (accountData: Partial<IAccount>) =>
+      fetchHandler(`${API_BASE_URI}/accounts`, {
+        method: "POST",
+        body: JSON.stringify(accountData),
+      }),
+    update: (id: string, accountData: Partial<IAccount>) =>
+      fetchHandler(`${API_BASE_URI}/accounts/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(accountData),
+      }),
+    delete: (id: string) =>
+      fetchHandler(`${API_BASE_URI}/accounts/${id}`, { method: "DELETE" }),
   },
 };
